@@ -2,6 +2,9 @@
 
 A modern Integration Platform as a Service (iPaaS) prototype built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui.
 
+[![CI](https://github.com/xhan0o/ipaas/actions/workflows/ci.yml/badge.svg)](https://github.com/xhan0o/ipaas/actions/workflows/ci.yml)
+[![Vercel](https://vercelbadge.vercel.app/api/xhan0o/ipaas)](https://vercel.com)
+
 ## Features
 
 ### 🎯 Dashboard
@@ -166,6 +169,7 @@ The prototype uses comprehensive mock data including:
 - `bun run build` - Build for production
 - `bun run start` - Start production server
 - `bun run lint` - Run ESLint
+- `bun run type-check` - Run TypeScript type checking without emitting files
 
 ### Adding New Integrations
 
@@ -177,6 +181,45 @@ The prototype uses comprehensive mock data including:
 ### Extending Components
 
 All components use shadcn/ui patterns and are fully typed with TypeScript. Follow the existing patterns in each module for consistency.
+
+## CI/CD
+
+This project uses GitHub Actions for continuous integration and Vercel for deployment.
+
+### GitHub Actions
+
+The CI pipeline runs on every push to `main` and on pull requests. It uses **Bun** for fast dependency installation and builds, matching the local development environment.
+
+The pipeline performs:
+
+- **Linting**: ESLint checks for code quality
+- **Type Checking**: TypeScript compilation validation (`bun run type-check`)
+- **Build Verification**: Ensures the project builds successfully
+
+View the workflow at [.github/workflows/ci.yml](.github/workflows/ci.yml)
+
+### Vercel Deployment
+
+The project is configured for automatic deployment on Vercel using **Bun** for faster installs and builds:
+
+- **Automatic Deployments**: Every push to `main` triggers a production deployment
+- **Preview Deployments**: Pull requests get preview deployments
+- **Build Caching**: Dependencies are cached to speed up builds
+- **Optimized Output**: Standalone build mode reduces deployment size
+- **Fast Package Manager**: Bun provides 3-5x faster install times compared to npm
+
+#### Build Optimizations
+
+- **Standalone Output**: Reduces deployment size by ~70%
+- **SWC Minification**: Faster builds with better tree-shaking
+- **Optimized Package Imports**: Tree-shaking for large packages (lucide-react, @nivo/*)
+- **Static Asset Caching**: Long-term caching headers for static assets
+
+To deploy manually:
+
+1. Connect your GitHub repository to Vercel
+2. Vercel will auto-detect Next.js configuration
+3. Deployments happen automatically on every push
 
 ## License
 

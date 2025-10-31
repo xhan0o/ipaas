@@ -4,6 +4,17 @@ import { Calendar, CheckCircle2 } from 'lucide-react'
 
 const roadmapItems = [
   {
+    date: '2025-10-31',
+    title: 'UX & Diagrams Update',
+    items: [
+      'Replaced Mermaid diagrams with React/Tailwind components',
+      'Added top-of-page clickable index (TOC) with anchors',
+      'Simplified diagram styling and improved responsiveness',
+      'Verified /info and dashboard render cleanly',
+      'Minor UX polish for diagram sections and headings',
+    ],
+  },
+  {
     date: '2025-10-30',
     title: 'Platform Foundation',
     items: [

@@ -1,6 +1,7 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
+import { Badge, badgeVariants } from '@/components/ui/badge'
+import type { VariantProps } from 'class-variance-authority'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
@@ -37,7 +38,9 @@ export function LogsTable({ logs }: LogsTableProps) {
     }
   }
 
-  const getStatusVariant = (status: LogEntry['status']) => {
+  type BadgeVariant = VariantProps<typeof badgeVariants>['variant']
+
+  const getStatusVariant = (status: LogEntry['status']): BadgeVariant => {
     switch (status) {
       case 'success':
         return 'success'
@@ -110,7 +113,7 @@ export function LogsTable({ logs }: LogsTableProps) {
                     {log.apiEndpoint}
                   </TableCell>
                   <TableCell className="align-top pt-5">
-                    <Badge variant={getStatusVariant(log.status) as any} className="gap-1 capitalize">
+                    <Badge variant={getStatusVariant(log.status)} className="gap-1 capitalize">
                       {getStatusIcon(log.status)}
                       {log.status}
                     </Badge>

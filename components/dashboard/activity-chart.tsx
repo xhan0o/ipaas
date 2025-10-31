@@ -15,8 +15,19 @@ export function ActivityChart() {
 
   // Transform data for Nivo format
   const chartData = useMemo(() => {
+    // Define type for aggregated data
+    interface AggregatedEntry {
+      time: string
+      total: number
+      Shopify?: number
+      Amazon?: number
+      NetSuite?: number
+      QuickBooks?: number
+      [key: string]: string | number | undefined
+    }
+
     // Group data by hour and aggregate
-    const aggregated = activityData.reduce((acc: any[], curr) => {
+    const aggregated = activityData.reduce((acc: AggregatedEntry[], curr) => {
       const hour = format(curr.timestamp, 'HH:00')
       const existing = acc.find(d => d.time === hour)
 
@@ -36,7 +47,7 @@ export function ActivityChart() {
                            curr.integrationId === 'netsuite' ? 'NetSuite' :
                            curr.integrationId === 'quickbooks' ? 'QuickBooks' : null
         
-        const newEntry: any = {
+        const newEntry: AggregatedEntry = {
           time: hour,
           total: curr.recordCount
         }
@@ -52,11 +63,11 @@ export function ActivityChart() {
     }, []).sort((a, b) => a.time.localeCompare(b.time))
 
     // Transform to Nivo format
-    const series = ['Shopify', 'Amazon', 'NetSuite', 'QuickBooks'].map(name => ({
+    const series = (['Shopify', 'Amazon', 'NetSuite', 'QuickBooks'] as const).map(name => ({
       id: name,
       data: aggregated.map(item => ({
         x: item.time,
-        y: item[name] || 0
+        y: (item[name] as number) || 0
       })),
       color: name === 'Shopify' ? '#3b82f6' :
              name === 'Amazon' ? '#f59e0b' :

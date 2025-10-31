@@ -1,5 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Badge, badgeVariants } from '@/components/ui/badge'
+import type { VariantProps } from 'class-variance-authority'
 import { Button } from '@/components/ui/button'
 import { Integration } from '@/types/integrations'
 import { ArrowUpRight, Lock, Settings } from 'lucide-react'
@@ -10,8 +11,10 @@ interface IntegrationCardProps {
   onConfigure: () => void
 }
 
+type BadgeVariant = VariantProps<typeof badgeVariants>['variant']
+
 export function IntegrationCard({ integration, onConfigure }: IntegrationCardProps) {
-  const statusMeta: Record<Integration['status'], { label: string; variant: 'success' | 'secondary' | 'outline' | 'error'; hint: string; buttonVariant: 'default' | 'outline'; cta: string }> = {
+  const statusMeta: Record<Integration['status'], { label: string; variant: BadgeVariant; hint: string; buttonVariant: 'default' | 'outline'; cta: string }> = {
     active: {
       label: 'Active',
       variant: 'success',
@@ -70,7 +73,7 @@ export function IntegrationCard({ integration, onConfigure }: IntegrationCardPro
                 {integration.name}
               </CardTitle>
               <div className="flex flex-wrap items-center gap-2">
-                <Badge variant={meta.variant as any} className="rounded-full px-2 py-0 text-[11px] uppercase">
+                <Badge variant={meta.variant} className="rounded-full px-2 py-0 text-[11px] uppercase">
                   {integration.status === 'not_available' && <Lock className="mr-1 h-3 w-3" />}
                   {meta.label}
                 </Badge>

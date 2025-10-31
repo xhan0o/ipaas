@@ -1,7 +1,8 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Badge, badgeVariants } from '@/components/ui/badge'
+import type { VariantProps } from 'class-variance-authority'
 import { Button } from '@/components/ui/button'
 import { IntegrationHealth } from '@/types/integrations'
 import { formatDistanceToNow } from 'date-fns'
@@ -13,8 +14,10 @@ interface HealthStatusProps {
   integrations: IntegrationHealth[]
 }
 
+type BadgeVariant = VariantProps<typeof badgeVariants>['variant']
+
 export function HealthStatus({ integrations }: HealthStatusProps) {
-  const statusTokens: Record<IntegrationHealth['status'], { label: string; badge: 'success' | 'warning' | 'error' | 'secondary'; indicator: string }> = {
+  const statusTokens: Record<IntegrationHealth['status'], { label: string; badge: BadgeVariant; indicator: string }> = {
     healthy: {
       label: 'Healthy',
       badge: 'success',
@@ -64,7 +67,7 @@ export function HealthStatus({ integrations }: HealthStatusProps) {
                       {integration.integrationName}
                     </h4>
                     <Badge
-                      variant={status.badge as any}
+                      variant={status.badge}
                       className="gap-1 rounded-full"
                     >
                       <span

@@ -3,7 +3,6 @@ import {
   IntegrationHealth,
   DashboardMetrics,
   ActivityData,
-  ErrorTrend,
   Alert,
   LogEntry,
   FieldMapping,

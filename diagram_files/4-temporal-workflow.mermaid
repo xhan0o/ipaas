@@ -1,0 +1,105 @@
+stateDiagram-v2
+    [*] --> WorkflowStarted: User triggers sync
+    
+    WorkflowStarted --> FetchCredentials: Load config
+    
+    FetchCredentials --> ExtractData: Credentials valid
+    FetchCredentials --> WorkflowFailed: Invalid credentials
+    
+    state ExtractData {
+        [*] --> CallExternalAPI
+        CallExternalAPI --> ParseResponse: Success
+        CallExternalAPI --> RetryExtract: Network error
+        RetryExtract --> CallExternalAPI: Attempt < 3
+        RetryExtract --> ExtractFailed: Max retries
+        ParseResponse --> [*]: Data ready
+        ExtractFailed --> [*]: Failed
+    }
+    
+    ExtractData --> ValidateData: Data extracted
+    ExtractData --> WorkflowFailed: Extract failed
+    
+    state ValidateData {
+        [*] --> CheckSchema
+        CheckSchema --> CheckRequired: Schema valid
+        CheckSchema --> ValidationFailed: Invalid schema
+        CheckRequired --> CheckDataTypes: All present
+        CheckRequired --> ValidationFailed: Missing fields
+        CheckDataTypes --> [*]: Valid
+        CheckDataTypes --> ValidationFailed: Type mismatch
+        ValidationFailed --> [*]: Failed
+    }
+    
+    ValidateData --> TransformData: Validation passed
+    ValidateData --> LogError: Validation failed
+    
+    state TransformData {
+        [*] --> LoadMappings
+        LoadMappings --> ApplyFieldMapping: Mappings loaded
+        ApplyFieldMapping --> ApplyTransformations: Fields mapped
+        ApplyTransformations --> EnrichData: Transforms applied
+        EnrichData --> [*]: Data ready
+    }
+    
+    TransformData --> LoadToHopstack: Transform complete
+    
+    state LoadToHopstack {
+        [*] --> PreparePayload
+        PreparePayload --> CallHopstackAPI: Payload ready
+        CallHopstackAPI --> VerifyResponse: API call made
+        VerifyResponse --> RetryLoad: 5xx error
+        VerifyResponse --> LoadFailed: 4xx error
+        VerifyResponse --> [*]: Success (2xx)
+        RetryLoad --> CallHopstackAPI: Attempt < 5
+        RetryLoad --> LoadFailed: Max retries
+        LoadFailed --> [*]: Failed
+    }
+    
+    LoadToHopstack --> UpdateSyncState: Load successful
+    LoadToHopstack --> LogError: Load failed
+    
+    UpdateSyncState --> LogSuccess: State updated
+    
+    LogSuccess --> NotifyUser: Log written
+    
+    NotifyUser --> WorkflowCompleted: Notification sent
+    
+    LogError --> UpdateErrorState: Error logged
+    
+    UpdateErrorState --> NotifyUserError: State updated
+    
+    NotifyUserError --> WorkflowFailed: Notification sent
+    
+    WorkflowCompleted --> [*]: Success ✓
+    WorkflowFailed --> [*]: Failed ✗
+    
+    note right of ExtractData
+        Retry Policy:
+        - Max attempts: 3
+        - Backoff: Exponential
+        - Timeout: 5 minutes
+    end note
+    
+    note right of TransformData
+        Activities:
+        - Load mappings from DB
+        - Apply field transformations
+        - Execute custom rules
+        - Enrich with defaults
+    end note
+    
+    note right of LoadToHopstack
+        Retry Policy:
+        - Max attempts: 5
+        - Backoff: 2x
+        - Only on 5xx errors
+        - Timeout: 2 minutes
+    end note
+    
+    note right of WorkflowCompleted
+        Workflow stores:
+        - Last sync cursor
+        - Records processed
+        - Execution time
+        - Success metrics
+    end note

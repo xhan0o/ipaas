@@ -1,0 +1,92 @@
+flowchart LR
+    subgraph "External Source"
+        ExtAPI[Third-party API<br/>Shopify/NetSuite/etc.]
+    end
+
+    subgraph "Extract Phase"
+        Trigger[Trigger Event<br/>• Schedule<br/>• Webhook<br/>• Manual]
+        FetchData[Fetch Data<br/>API Call + Auth]
+        RawData[Raw Data<br/>JSON Response]
+    end
+
+    subgraph "Transform Phase"
+        Validate[Validate Data<br/>• Schema check<br/>• Required fields<br/>• Data types]
+        Mapper[Field Mapper<br/>• Apply mappings<br/>• Transform rules<br/>• Calculations]
+        Enrich[Enrich Data<br/>• Lookup tables<br/>• Default values<br/>• Concatenation]
+        TransformedData[Transformed Data<br/>Hopstack Format]
+    end
+
+    subgraph "Load Phase"
+        LoadValidate[Final Validation<br/>• Business rules<br/>• Duplicates<br/>• Constraints]
+        LoadAPI[Load to Hopstack<br/>POST API Call]
+        Response[API Response<br/>Success/Error]
+    end
+
+    subgraph "Post-Processing"
+        LogResult[Log Result<br/>• Timestamp<br/>• Records count<br/>• Status]
+        UpdateState[Update State<br/>• Last sync cursor<br/>• Success rate<br/>• Next run time]
+        Notify[Notify<br/>• WebSocket update<br/>• Email on error<br/>• Dashboard refresh]
+    end
+
+    subgraph "Storage"
+        ConfigDB[(Config DB<br/>Mappings,<br/>Credentials)]
+        LogDB[(Log DB<br/>Activity,<br/>Errors)]
+        Cache[(Cache<br/>Temp data,<br/>Rate limits)]
+    end
+
+    %% Flow connections
+    ExtAPI --> Trigger
+    Trigger --> FetchData
+    FetchData --> RawData
+    
+    RawData --> Validate
+    Validate --> Mapper
+    Mapper --> Enrich
+    Enrich --> TransformedData
+    
+    TransformedData --> LoadValidate
+    LoadValidate --> LoadAPI
+    LoadAPI --> Response
+    
+    Response --> LogResult
+    LogResult --> UpdateState
+    UpdateState --> Notify
+
+    %% Data storage interactions
+    ConfigDB -.->|Read mappings| Mapper
+    ConfigDB -.->|Read credentials| FetchData
+    ConfigDB -.->|Read rules| Validate
+    
+    Cache -.->|Check rate limit| FetchData
+    Cache -.->|Store temp| RawData
+    Cache -.->|Update limit| Response
+    
+    LogResult -.->|Write log| LogDB
+    UpdateState -.->|Update state| ConfigDB
+
+    %% Error flows
+    Validate -->|Validation Error| LogResult
+    Mapper -->|Transform Error| LogResult
+    LoadAPI -->|API Error| LogResult
+
+    %% Retry flow
+    Response -.->|Retry on failure| FetchData
+
+    %% Success path
+    Response -->|Success| HopstackDB[(Hopstack DB<br/>Orders,<br/>Inventory)]
+
+    classDef source fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef extract fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef transform fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+    classDef load fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef post fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef storage fill:#efebe9,stroke:#4e342e,stroke-width:2px
+    classDef success fill:#c8e6c9,stroke:#1b5e20,stroke-width:3px
+
+    class ExtAPI source
+    class Trigger,FetchData,RawData extract
+    class Validate,Mapper,Enrich,TransformedData transform
+    class LoadValidate,LoadAPI,Response load
+    class LogResult,UpdateState,Notify post
+    class ConfigDB,LogDB,Cache storage
+    class HopstackDB success

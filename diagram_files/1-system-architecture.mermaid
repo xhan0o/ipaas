@@ -1,0 +1,142 @@
+graph TB
+    subgraph "Frontend Layer"
+        WebApp[Web Application<br/>React - Customer Portal]
+        AdminUI[Admin Portal<br/>Internal Tools]
+    end
+
+    subgraph "API Gateway"
+        Gateway[API Gateway<br/>Authentication & Routing]
+        WS[WebSocket Server<br/>Real-time Updates]
+    end
+
+    subgraph "Application Layer"
+        API[REST API Server<br/>Business Logic]
+        AuthService[Auth Service<br/>OAuth2/JWT]
+        MapperService[Mapper Service<br/>Field Transformations]
+    end
+
+    subgraph "Temporal Orchestration"
+        TemporalServer[Temporal Server<br/>Workflow Engine]
+        TemporalWorkers[Temporal Workers<br/>Activity Executors]
+        
+        subgraph "Workflows"
+            SyncWorkflow[Integration Sync Workflow]
+            ScheduledSync[Scheduled Batch Workflow]
+            ValidationWorkflow[Data Validation Workflow]
+        end
+    end
+
+    subgraph "Integration Connectors"
+        ShopifyConnector[Shopify Connector]
+        NetSuiteConnector[NetSuite Connector]
+        ShipStationConnector[ShipStation Connector]
+        AmazonConnector[Amazon Connector]
+        GenericConnector[Generic HTTP Connector]
+    end
+
+    subgraph "Data Layer"
+        PostgreSQL[(PostgreSQL<br/>Configs, Mappings,<br/>Credentials)]
+        MongoDB[(MongoDB<br/>Logs, Events,<br/>Time-series Data)]
+        Redis[(Redis<br/>Cache, Sessions,<br/>Rate Limiting)]
+        S3[Object Storage<br/>File Uploads,<br/>Exports]
+    end
+
+    subgraph "Monitoring & Observability"
+        Logging[Logging System<br/>ELK Stack]
+        Metrics[Metrics<br/>Prometheus/Grafana]
+        Alerting[Alerting<br/>Slack/Email]
+    end
+
+    subgraph "External Systems"
+        ThirdPartyAPIs[Third-party APIs<br/>Shopify, NetSuite, etc.]
+        HopstackPlatform[Hopstack Platform<br/>Orders, Inventory, etc.]
+    end
+
+    subgraph "Security"
+        SecretsManager[Secrets Manager<br/>Vault]
+        Encryption[Encryption Service]
+    end
+
+    %% Frontend connections
+    WebApp --> Gateway
+    AdminUI --> Gateway
+
+    %% Gateway connections
+    Gateway --> API
+    Gateway --> WS
+    Gateway --> AuthService
+
+    %% API connections
+    API --> TemporalServer
+    API --> MapperService
+    API --> PostgreSQL
+    API --> Redis
+
+    %% Temporal connections
+    TemporalServer --> TemporalWorkers
+    TemporalWorkers --> SyncWorkflow
+    TemporalWorkers --> ScheduledSync
+    TemporalWorkers --> ValidationWorkflow
+
+    %% Worker connections to connectors
+    TemporalWorkers --> ShopifyConnector
+    TemporalWorkers --> NetSuiteConnector
+    TemporalWorkers --> ShipStationConnector
+    TemporalWorkers --> AmazonConnector
+    TemporalWorkers --> GenericConnector
+
+    %% Connector to external APIs
+    ShopifyConnector --> ThirdPartyAPIs
+    NetSuiteConnector --> ThirdPartyAPIs
+    ShipStationConnector --> ThirdPartyAPIs
+    AmazonConnector --> ThirdPartyAPIs
+    GenericConnector --> ThirdPartyAPIs
+
+    %% Data transformation
+    TemporalWorkers --> MapperService
+    TemporalWorkers --> HopstackPlatform
+
+    %% Data layer connections
+    TemporalWorkers --> PostgreSQL
+    TemporalWorkers --> MongoDB
+    API --> MongoDB
+    MapperService --> PostgreSQL
+
+    %% Security connections
+    AuthService --> SecretsManager
+    TemporalWorkers --> SecretsManager
+    API --> Encryption
+
+    %% Monitoring connections
+    API -.-> Logging
+    TemporalWorkers -.-> Logging
+    TemporalServer -.-> Metrics
+    API -.-> Metrics
+    Metrics -.-> Alerting
+
+    %% Real-time updates
+    TemporalWorkers --> WS
+    MongoDB --> WS
+
+    %% Storage
+    API --> S3
+
+    classDef frontend fill:#e1f5ff,stroke:#01579b,stroke-width:2px
+    classDef gateway fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef application fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef temporal fill:#e8f5e9,stroke:#1b5e20,stroke-width:3px
+    classDef connector fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef data fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef monitoring fill:#e0f2f1,stroke:#004d40,stroke-width:2px
+    classDef external fill:#efebe9,stroke:#3e2723,stroke-width:2px
+    classDef security fill:#ffebee,stroke:#b71c1c,stroke-width:2px
+
+    class WebApp,AdminUI frontend
+    class Gateway,WS gateway
+    class API,AuthService,MapperService application
+    class TemporalServer,TemporalWorkers,SyncWorkflow,ScheduledSync,ValidationWorkflow temporal
+    class ShopifyConnector,NetSuiteConnector,ShipStationConnector,AmazonConnector,GenericConnector connector
+    class PostgreSQL,MongoDB,Redis,S3 data
+    class Logging,Metrics,Alerting monitoring
+    class ThirdPartyAPIs,HopstackPlatform external
+    class SecretsManager,Encryption security

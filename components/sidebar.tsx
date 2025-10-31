@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { LayoutDashboard, Grid3x3, GitBranch, FileText } from 'lucide-react'
+import { LayoutDashboard, Grid3x3, GitBranch, FileText, BookOpen } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
@@ -40,6 +40,12 @@ export const navItems: NavItem[] = [
     description: 'Trace every sync & retry',
     href: '/logs',
     icon: FileText,
+  },
+  {
+    title: 'Platform Guide',
+    description: 'Architecture & design docs',
+    href: '/info',
+    icon: BookOpen,
   },
 ]
 

@@ -28,7 +28,7 @@ This folder contains 4 key diagrams explaining the iPaaS platform architecture.
 **Shows**:
 - Extract phase (API calls, authentication)
 - Transform phase (validation, mapping, enrichment)
-- Load phase (loading to Hopstack)
+- Load phase (loading to platform)
 - Post-processing (logging, state updates, notifications)
 - Error handling and retry logic
 

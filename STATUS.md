@@ -41,7 +41,7 @@
 ### Field Mapper
 - [x] Drag-and-drop field mapping
 - [x] 9 source fields (Shopify)
-- [x] 7 target fields (Hopstack)
+- [x] 7 target fields (Platform)
 - [x] Pre-configured mappings
 - [x] Data type indicators
 - [x] Mapping statistics

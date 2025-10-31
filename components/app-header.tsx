@@ -28,9 +28,9 @@ export function AppHeader() {
           </Button>
           <div className="flex flex-col">
             <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Hopstack
+              Platform
             </span>
-            <span className="text-sm font-semibold">iPaaS Platform</span>
+            <span className="text-sm font-semibold">iPaaS Control</span>
           </div>
         </div>
 
@@ -38,7 +38,7 @@ export function AppHeader() {
           <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Control Center
           </span>
-          <span className="text-lg font-semibold">Hopstack iPaaS</span>
+          <span className="text-lg font-semibold">iPaaS Platform</span>
         </div>
 
         <div className="flex flex-1 items-center gap-3 md:justify-end">
@@ -70,7 +70,7 @@ export function AppHeader() {
             </Button>
             <ThemeToggle />
             <div className="hidden h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 via-primary/40 to-primary/20 text-sm font-semibold text-primary md:flex">
-              WM
+              SP
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export function AppHeader() {
                 <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Navigate
                 </p>
-                <p className="text-base font-semibold">Hopstack iPaaS</p>
+                <p className="text-base font-semibold">iPaaS Platform</p>
               </div>
               <Button
                 variant="ghost"
@@ -132,6 +132,36 @@ export function AppHeader() {
                 )
               })}
             </nav>
+
+            <div className="mt-auto space-y-3 pt-6">
+              <div className="rounded-2xl border border-border/60 bg-background/70 p-4 shadow-inner">
+                <p className="text-sm font-semibold text-foreground">
+                  Release highlight
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Adaptive retries shipped • View the launch notes for more insight.
+                </p>
+                <Link href="/roadmap" onClick={() => setMobileNavOpen(false)} className="mt-3 block">
+                  <span className="inline-flex w-full items-center justify-center rounded-xl border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold text-primary transition hover:bg-primary/20">
+                    View roadmap
+                  </span>
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-border/60 bg-background/80 p-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
+                  SP
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-foreground">
+                    Shantanu Patel
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Author @ Shan0o.com
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

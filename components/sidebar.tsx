@@ -59,11 +59,11 @@ export function Sidebar() {
       <div className="relative flex flex-1 flex-col gap-6">
         <div className="flex items-center gap-3 rounded-2xl border border-border/60 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent px-4 py-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-primary/80 to-primary text-lg font-bold text-primary-foreground shadow-lg shadow-primary/40">
-            HX
+            iP
           </div>
           <div className="flex flex-col">
             <span className="text-xs uppercase tracking-wide text-primary/80">
-              Hopstack Cloud
+              iPaaS Platform
             </span>
             <span className="text-base font-semibold text-foreground">
               Integration Control
@@ -128,14 +128,14 @@ export function Sidebar() {
 
           <div className="flex items-center gap-3 rounded-2xl border border-border/60 bg-background/80 p-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
-              WM
+              SP
             </div>
             <div className="flex-1">
               <p className="text-sm font-semibold text-foreground">
-                Warehouse Manager
+                Shantanu Patel
               </p>
               <p className="text-xs text-muted-foreground">
-                manager@hopstack.com
+                Author @ Shan0o.com
               </p>
             </div>
           </div>

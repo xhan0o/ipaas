@@ -21,7 +21,7 @@ const shopifyFields = [
   { id: 'line_items.price', name: 'line_items.price', type: 'Number', required: true },
 ]
 
-const hopstackFields = [
+const targetFields = [
   { id: 'order_reference', name: 'order_reference', type: 'String', required: true },
   { id: 'order_date', name: 'order_date', type: 'Date', required: true },
   { id: 'customer_name', name: 'customer_name', type: 'String', required: true },
@@ -33,7 +33,7 @@ const hopstackFields = [
 
 export default function MapperPage() {
   const [sourceAPI, setSourceAPI] = useState('Shopify Orders API')
-  const [targetAPI, setTargetAPI] = useState('Hopstack Orders API')
+  const [targetAPI, setTargetAPI] = useState('Platform Orders API')
   const [mappings, setMappings] = useState(shopifyFieldMappings)
 
   const handleSave = () => {
@@ -56,7 +56,7 @@ export default function MapperPage() {
               Model field relationships
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
-              Drag and drop to align upstream payloads with Hopstack&apos;s canonical data model. Apply transforms and validations before you ship.
+              Drag and drop to align upstream payloads with the canonical data model. Apply transforms and validations before you ship.
             </p>
           </div>
         </div>
@@ -105,16 +105,16 @@ export default function MapperPage() {
               Target platform API
             </p>
             <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
-              <label className="text-sm font-medium text-foreground">Hopstack domain</label>
+              <label className="text-sm font-medium text-foreground">Platform domain</label>
               <div className="relative mt-3">
                 <select
                   value={targetAPI}
                   onChange={event => setTargetAPI(event.target.value)}
                   className="w-full appearance-none rounded-xl border border-border/60 bg-background/80 px-4 py-3 text-sm font-medium text-foreground shadow-inner focus:outline-none focus:ring-2 focus:ring-primary/40"
                 >
-                  <option>Hopstack Orders API</option>
-                  <option>Hopstack Inventory API</option>
-                  <option>Hopstack Products API</option>
+                  <option>Platform Orders API</option>
+                  <option>Platform Inventory API</option>
+                  <option>Platform Products API</option>
                 </select>
                 <Wand2 className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               </div>
@@ -125,7 +125,7 @@ export default function MapperPage() {
 
       <MapperCanvas
         sourceFields={shopifyFields}
-        targetFields={hopstackFields}
+        targetFields={targetFields}
         mappings={mappings}
         onMappingsChange={setMappings}
       />
@@ -146,7 +146,7 @@ export default function MapperPage() {
                 Required coverage
               </p>
               <p className="mt-2 text-3xl font-semibold text-foreground">
-                {mappings.filter(m => m.required).length} / {hopstackFields.filter(f => f.required).length}
+                {mappings.filter(m => m.required).length} / {targetFields.filter(f => f.required).length}
               </p>
             </div>
             <div>
@@ -160,13 +160,13 @@ export default function MapperPage() {
           </div>
           <Badge
             variant={
-              mappings.filter(m => m.required).length === hopstackFields.filter(f => f.required).length
+              mappings.filter(m => m.required).length === targetFields.filter(f => f.required).length
                 ? 'success'
                 : 'warning'
             }
             className="rounded-full px-4 py-1 text-sm font-semibold"
           >
-            {mappings.filter(m => m.required).length === hopstackFields.filter(f => f.required).length
+            {mappings.filter(m => m.required).length === targetFields.filter(f => f.required).length
               ? 'Ready to deploy'
               : 'Complete required fields'}
           </Badge>

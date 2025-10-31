@@ -1,7 +1,7 @@
 # PRD: Integration Mapper
 
 ## Overview
-Visual interface to map external integration fields to Hopstack platform fields (no-code mapping)
+Visual interface to map external integration fields to platform fields (no-code mapping)
 
 ## User Persona
 - Implementation Engineer (Internal)
@@ -12,13 +12,13 @@ Visual interface to map external integration fields to Hopstack platform fields 
 
 ### 1. Split-Screen Layout
 - **Left Panel**: External integration APIs & fields
-- **Right Panel**: Hopstack platform APIs & fields
+- **Right Panel**: Platform APIs & fields
 - **Center Canvas**: Visual connection lines
 - **Ratio**: 30% | 40% | 30%
 
 ### 2. API Selection
 - **Left dropdown**: Select integration API (e.g., "Shopify Orders API")
-- **Right dropdown**: Select platform API (e.g., "Hopstack Orders API")
+- **Right dropdown**: Select platform API (e.g., "Platform Orders API")
 - **Auto-load fields** when API selected
 
 ### 3. Field Mapping Interface
@@ -51,7 +51,7 @@ Visual interface to map external integration fields to Hopstack platform fields 
 - **Load template** dropdown
 - **Default mappings** (pre-configured by admin)
 
-## Sample Data - Shopify to Hopstack Orders Mapping
+## Sample Data - Shopify to Platform Orders Mapping
 
 ```
 LEFT PANEL: Shopify Orders API
@@ -71,7 +71,7 @@ LEFT PANEL: Shopify Orders API
    ├─ city [String]
    └─ zip [String]
 
-RIGHT PANEL: Hopstack Orders API
+RIGHT PANEL: Platform Orders API
 ├─ order_reference [String] *required
 ├─ order_date [Date] *required
 ├─ customer_name [String] *required
@@ -150,7 +150,7 @@ shipping_address.* ──────→ delivery_address.* [Auto-mapped]
 
 ### Default Template: Shopify Orders
 ```
-Pre-configured mappings for common Shopify → Hopstack order flow
+Pre-configured mappings for common Shopify → Platform order flow
 Saves 80% of mapping time for new customers
 ```
 

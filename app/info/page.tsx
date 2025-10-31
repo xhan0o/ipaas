@@ -45,7 +45,7 @@ export default function InfoPage() {
           <h2 className="text-2xl font-semibold">Platform Overview</h2>
           <p className="text-muted-foreground">
             An Integration Platform as a Service (iPaaS) designed to connect external systems
-            with Hopstack&apos;s fulfillment platform. Built for reliability, scalability, and
+            with your target platform. Built for reliability, scalability, and
             operational excellence.
           </p>
         </div>
@@ -151,7 +151,7 @@ export default function InfoPage() {
             <h2 className="text-2xl font-semibold">Data Flow Pipeline</h2>
           </div>
           <p className="text-muted-foreground">
-            End-to-end data transformation from external sources to Hopstack platform,
+            End-to-end data transformation from external sources to the target platform,
             including extract, transform, and load phases.
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function InfoPage() {
           <div className="space-y-1">
             <h3 className="text-lg font-semibold text-foreground">ETL Pipeline</h3>
             <p className="text-sm text-muted-foreground">
-              Extract phase (API calls, authentication), Transform phase (validation, mapping, enrichment), Load phase (Hopstack API), and Post-processing (logging, notifications).
+              Extract phase (API calls, authentication), Transform phase (validation, mapping, enrichment), Load phase (Platform API), and Post-processing (logging, notifications).
             </p>
           </div>
           <div className="rounded-xl border border-border/60 bg-card p-4 md:p-6">
@@ -184,7 +184,7 @@ export default function InfoPage() {
           <Card className="border-border/60 bg-card/50 p-4">
             <h3 className="mb-2 text-sm font-semibold">Load</h3>
             <p className="text-xs text-muted-foreground">
-              Final validation, load to Hopstack via API, handle responses and retries
+              Final validation, load to platform via API, handle responses and retries
             </p>
           </Card>
         </div>
@@ -330,8 +330,8 @@ export default function InfoPage() {
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Drag-and-drop interface for mapping external integration fields to Hopstack
-              platform fields with transformation support.
+              Drag-and-drop interface for mapping external integration fields to platform
+              fields with transformation support.
             </p>
             <ul className="space-y-1 text-sm text-muted-foreground">
               <li>• Split-panel layout (Source ↔ Target)</li>

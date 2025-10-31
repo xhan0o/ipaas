@@ -13,12 +13,12 @@ flowchart LR
         Validate[Validate Data<br/>• Schema check<br/>• Required fields<br/>• Data types]
         Mapper[Field Mapper<br/>• Apply mappings<br/>• Transform rules<br/>• Calculations]
         Enrich[Enrich Data<br/>• Lookup tables<br/>• Default values<br/>• Concatenation]
-        TransformedData[Transformed Data<br/>Hopstack Format]
+        TransformedData[Transformed Data<br/>Platform Format]
     end
 
     subgraph "Load Phase"
         LoadValidate[Final Validation<br/>• Business rules<br/>• Duplicates<br/>• Constraints]
-        LoadAPI[Load to Hopstack<br/>POST API Call]
+        LoadAPI[Load to Platform<br/>POST API Call]
         Response[API Response<br/>Success/Error]
     end
 
@@ -73,7 +73,7 @@ flowchart LR
     Response -.->|Retry on failure| FetchData
 
     %% Success path
-    Response -->|Success| HopstackDB[(Hopstack DB<br/>Orders,<br/>Inventory)]
+    Response -->|Success| PlatformDB[(Platform DB<br/>Orders,<br/>Inventory)]
 
     classDef source fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
     classDef extract fill:#fff3e0,stroke:#e65100,stroke-width:2px
@@ -89,4 +89,4 @@ flowchart LR
     class LoadValidate,LoadAPI,Response load
     class LogResult,UpdateState,Notify post
     class ConfigDB,LogDB,Cache storage
-    class HopstackDB success
+    class PlatformDB success

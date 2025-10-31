@@ -67,7 +67,7 @@ export function ArchitectureDiagram() {
       color: 'from-slate-50 to-slate-100/50 border-slate-200',
       items: [
         { name: 'Third-party APIs', description: 'Shopify, NetSuite, etc.' },
-        { name: 'Hopstack Platform', description: 'Orders, Inventory, etc.' },
+        { name: 'Target Platform', description: 'Orders, Inventory, etc.' },
       ],
     },
   ]

@@ -23,9 +23,9 @@ export function DataFlowDiagram() {
     },
     {
       title: 'Load',
-      description: 'Final validation, load to Hopstack via API, handle responses',
+      description: 'Final validation, load to platform via API, handle responses',
       color: 'from-emerald-50 to-emerald-100/50 border-emerald-200',
-      steps: ['Final Validation', 'Load to Hopstack', 'API Response'],
+      steps: ['Final Validation', 'Load to Platform', 'API Response'],
     },
     {
       title: 'Post-Process',

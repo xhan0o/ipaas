@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an iPaaS (Integration Platform as a Service) project for Hopstack, a warehouse management platform. The system enables customers to connect and sync data between Hopstack and external platforms (e.g., Shopify, NetSuite, ShipStation, Amazon Seller Central).
+This is an iPaaS (Integration Platform as a Service) platform. The system enables customers to connect and sync data between external platforms (e.g., Shopify, NetSuite, ShipStation, Amazon Seller Central) and target systems.
 
 **Current Status**: Planning phase - PRDs available in `/PRDfiles/`, no implementation code yet.
 
@@ -33,7 +33,7 @@ This is an iPaaS (Integration Platform as a Service) project for Hopstack, a war
 
 4. **Integration Mapper** (`PRDfiles/integration-mapper-prd.md`)
    - Visual no-code field mapping interface
-   - Split-screen layout: External API fields (left) → Hopstack fields (right)
+   - Split-screen layout: External API fields (left) → Platform fields (right)
    - Drag-and-drop or click-to-connect mapping
    - Transformation layer: date formatting, concatenation, splits, math, conditionals, lookups
    - Template system for reusable mappings
@@ -49,7 +49,7 @@ This is an iPaaS (Integration Platform as a Service) project for Hopstack, a war
 
 **Data Flow**:
 ```
-External System API → Configurator (credentials) → Mapper (field transformations) → Hopstack Platform → Logging (observability)
+External System API → Configurator (credentials) → Mapper (field transformations) → Target Platform → Logging (observability)
 ```
 
 **Health Status Logic**:

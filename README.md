@@ -1,4 +1,4 @@
-# Hopstack iPaaS Platform
+# iPaaS Platform
 
 A modern Integration Platform as a Service (iPaaS) prototype built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui.
 
@@ -114,7 +114,7 @@ The prototype uses comprehensive mock data including:
 - Real-time dashboard metrics
 - 7 integration health statuses
 - 6+ log entries with various states
-- Pre-configured field mappings (Shopify → Hopstack)
+- Pre-configured field mappings (Shopify → Platform)
 - Activity timeline data (24 hours)
 - Sample alerts and error scenarios
 
@@ -227,5 +227,5 @@ This is a prototype/demo project.
 
 ## Contact
 
-For questions or feedback about this prototype, contact the Hopstack team.
+For questions or feedback about this prototype, please open an issue on GitHub.
 

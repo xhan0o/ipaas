@@ -20,7 +20,7 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
 
-const STORAGE_KEY = 'hopstack-theme'
+const STORAGE_KEY = 'ipaas-theme'
 
 const applyThemeClass = (theme: Theme) => {
   if (typeof document === 'undefined') return

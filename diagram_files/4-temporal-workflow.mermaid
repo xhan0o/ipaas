@@ -41,22 +41,22 @@ stateDiagram-v2
         EnrichData --> [*]: Data ready
     }
     
-    TransformData --> LoadToHopstack: Transform complete
+    TransformData --> LoadToPlatform: Transform complete
     
-    state LoadToHopstack {
+    state LoadToPlatform {
         [*] --> PreparePayload
-        PreparePayload --> CallHopstackAPI: Payload ready
-        CallHopstackAPI --> VerifyResponse: API call made
+        PreparePayload --> CallPlatformAPI: Payload ready
+        CallPlatformAPI --> VerifyResponse: API call made
         VerifyResponse --> RetryLoad: 5xx error
         VerifyResponse --> LoadFailed: 4xx error
         VerifyResponse --> [*]: Success (2xx)
-        RetryLoad --> CallHopstackAPI: Attempt < 5
+        RetryLoad --> CallPlatformAPI: Attempt < 5
         RetryLoad --> LoadFailed: Max retries
         LoadFailed --> [*]: Failed
     }
     
-    LoadToHopstack --> UpdateSyncState: Load successful
-    LoadToHopstack --> LogError: Load failed
+    LoadToPlatform --> UpdateSyncState: Load successful
+    LoadToPlatform --> LogError: Load failed
     
     UpdateSyncState --> LogSuccess: State updated
     
@@ -88,7 +88,7 @@ stateDiagram-v2
         - Enrich with defaults
     end note
     
-    note right of LoadToHopstack
+    note right of LoadToPlatform
         Retry Policy:
         - Max attempts: 5
         - Backoff: 2x

@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Hopstack iPaaS Platform',
-  description: 'Integration Platform as a Service for Hopstack',
+  title: 'iPaaS Platform',
+  description: 'Integration Platform as a Service',
 }
 
 export default function RootLayout({
@@ -36,6 +36,30 @@ export default function RootLayout({
                   {children}
                 </div>
               </main>
+              <footer className="relative z-10 border-t border-border/60 bg-background/60 backdrop-blur-sm">
+                <div className="mx-auto flex max-w-6xl items-center justify-center px-4 py-3 md:px-8 lg:px-12">
+                  <p className="text-xs text-muted-foreground">
+                    Made by{' '}
+                    <a
+                      href="https://shan0o.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-foreground transition-colors hover:text-primary"
+                    >
+                      Shantanu Patel
+                    </a>
+                    {' • '}
+                    <a
+                      href="https://shan0o.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-primary"
+                    >
+                      shan0o.com
+                    </a>
+                  </p>
+                </div>
+              </footer>
             </div>
           </div>
         </ThemeProvider>

@@ -151,7 +151,7 @@ export function MapperCanvas({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-muted-foreground">
-              Target fields · Hopstack
+              Target fields · Platform
             </h3>
             <Badge variant="outline" className="rounded-full border-border/60 text-xs">
               {targetFields.length} fields

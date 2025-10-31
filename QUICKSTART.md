@@ -23,7 +23,7 @@ The development server is already running at **http://localhost:3001**
 
 3. **Field Mapper** (`/mapper`)
    - Drag-and-drop field mapping
-   - Shopify → Hopstack pre-configured mappings
+   - Shopify → Platform pre-configured mappings
    - Data type indicators
    - Mapping statistics
    - Template save/load buttons

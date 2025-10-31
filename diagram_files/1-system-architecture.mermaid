@@ -49,7 +49,7 @@ graph TB
 
     subgraph "External Systems"
         ThirdPartyAPIs[Third-party APIs<br/>Shopify, NetSuite, etc.]
-        HopstackPlatform[Hopstack Platform<br/>Orders, Inventory, etc.]
+        TargetPlatform[Target Platform<br/>Orders, Inventory, etc.]
     end
 
     subgraph "Security"
@@ -94,7 +94,7 @@ graph TB
 
     %% Data transformation
     TemporalWorkers --> MapperService
-    TemporalWorkers --> HopstackPlatform
+    TemporalWorkers --> TargetPlatform
 
     %% Data layer connections
     TemporalWorkers --> PostgreSQL
@@ -138,5 +138,5 @@ graph TB
     class ShopifyConnector,NetSuiteConnector,ShipStationConnector,AmazonConnector,GenericConnector connector
     class PostgreSQL,MongoDB,Redis,S3 data
     class Logging,Metrics,Alerting monitoring
-    class ThirdPartyAPIs,HopstackPlatform external
+    class ThirdPartyAPIs,TargetPlatform external
     class SecretsManager,Encryption security

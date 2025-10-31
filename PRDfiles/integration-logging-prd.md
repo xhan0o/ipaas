@@ -41,9 +41,9 @@ Monitor integration activity, errors, and performance for debugging and observab
   - Response body
   - Error message (if failed)
 - **Mapped Data**:
-  - Source fields → Hopstack fields
+  - Source fields → Platform fields
   - Transformation applied
-  - Final payload sent to Hopstack
+  - Final payload sent to platform
 
 ### 4. Real-Time Updates
 - **Auto-refresh** every 30 seconds (toggle on/off)
@@ -63,7 +63,7 @@ Log Entries:
 1. 
 Timestamp: 2025-10-29 14:23:15
 Integration: Shopify
-API: Orders API → Hopstack Orders
+API: Orders API → Platform Orders
 Status: ✓ Success
 Records: 25 orders processed
 Duration: 1,243ms
@@ -72,7 +72,7 @@ Details: 25 orders synced successfully
 2.
 Timestamp: 2025-10-29 14:20:08
 Integration: NetSuite
-API: Inventory API → Hopstack Inventory
+API: Inventory API → Platform Inventory
 Status: ✗ Failed
 Records: 0/150 processed
 Duration: 15,002ms (timeout)
@@ -82,7 +82,7 @@ Actions: [Retry] [View Details]
 3.
 Timestamp: 2025-10-29 14:18:32
 Integration: ShipStation
-API: Shipments API → Hopstack Fulfillments
+API: Shipments API → Platform Fulfillments
 Status: ⚠ Partial Success
 Records: 47/50 processed (3 failed)
 Duration: 2,567ms
@@ -92,7 +92,7 @@ Actions: [View Failed Items] [Retry Failed]
 4.
 Timestamp: 2025-10-29 14:15:01
 Integration: Amazon Seller Central
-API: Products API → Hopstack Products
+API: Products API → Platform Products
 Status: ⏳ Pending
 Records: Processing...
 Duration: -
@@ -104,7 +104,7 @@ Duration: -
 LOG ID: #12847
 Timestamp: 2025-10-29 14:20:08 UTC
 Integration: NetSuite ERP
-Direction: NetSuite → Hopstack
+Direction: NetSuite → Platform
 Status: Failed ✗
 
 REQUEST:

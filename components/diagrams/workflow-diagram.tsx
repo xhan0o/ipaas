@@ -52,12 +52,12 @@ export function WorkflowDiagram() {
       ],
     },
     {
-      name: 'Load to Hopstack',
+      name: 'Load to Platform',
       description: 'Retry Policy: Max 5 attempts, 2x backoff on 5xx errors',
       color: 'from-emerald-50 to-emerald-100/50 border-emerald-200',
       substates: [
         { name: 'Prepare Payload' },
-        { name: 'Call Hopstack API' },
+        { name: 'Call Platform API' },
         { name: 'Verify Response' },
         { name: 'Retry on 5xx Error' },
       ],
